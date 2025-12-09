@@ -1,0 +1,29 @@
+<h1>Global Search</h1>
+<form method="get" action="/search">
+  <input type="text" name="q" placeholder="Search..." value="<%= q %>" />
+  <select name="type">
+    <option value="all" <%= type === 'all' ? 'selected' : '' %>>All</option>
+    <option value="tasks" <%= type === 'tasks' ? 'selected' : '' %>>Tasks</option>
+    <option value="notes" <%= type === 'notes' ? 'selected' : '' %>>Notes</option>
+    <option value="bookmarks" <%= type === 'bookmarks' ? 'selected' : '' %>>Bookmarks</option>
+    <option value="events" <%= type === 'events' ? 'selected' : '' %>>Events</option>
+  </select>
+  <button type="submit">Search</button>
+</form>
+
+<ul>
+  <% results.forEach(function(r) { %>
+    <li>
+      <strong><%= r.kind %></strong> -
+      <% if (r.kind === 'task') { %>
+        <%= r.item.title %>
+      <% } else if (r.kind === 'note') { %>
+        <%= r.item.title %>
+      <% } else if (r.kind === 'bookmark') { %>
+        <%= r.item.title %> (<%= r.item.url %>)
+      <% } else if (r.kind === 'event') { %>
+        <%= r.item.title %>
+      <% } %>
+    </li>
+  <% }); %>
+</ul>

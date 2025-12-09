@@ -1,0 +1,30 @@
+<h1>Tasks</h1>
+<p><a href="/tasks/new">New task</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Due</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% tasks.forEach(function(task) { %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.status %></td>
+        <td><%= task.priority %></td>
+        <td><%= task.dueDate ? new Date(task.dueDate).toLocaleDateString() : '' %></td>
+        <td>
+          <a href="/tasks/<%= task.id %>/edit">Edit</a>
+          <form method="post" action="/tasks/<%= task.id %>/delete" style="display:inline;">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>

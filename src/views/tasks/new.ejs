@@ -1,0 +1,32 @@
+<h1>New Task</h1>
+<form method="post" action="/tasks">
+  <div>
+    <label>Title</label><br />
+    <input type="text" name="title" required />
+  </div>
+  <div>
+    <label>Description</label><br />
+    <textarea name="description"></textarea>
+  </div>
+  <div>
+    <label>Status</label><br />
+    <select name="status">
+      <option value="TODO">To Do</option>
+      <option value="IN_PROGRESS">In Progress</option>
+      <option value="DONE">Done</option>
+    </select>
+  </div>
+  <div>
+    <label>Priority</label><br />
+    <select name="priority">
+      <option value="LOW">Low</option>
+      <option value="MEDIUM" selected>Medium</option>
+      <option value="HIGH">High</option>
+    </select>
+  </div>
+  <div>
+    <label>Due date</label><br />
+    <input type="date" name="dueDate" />
+  </div>
+  <button type="submit">Create</button>
+</form>

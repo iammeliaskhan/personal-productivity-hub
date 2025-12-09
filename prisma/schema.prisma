@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  sessions     Session[]
+  tasks        Task[]
+  notes        Note[]
+  bookmarks    Bookmark[]
+  events       Event[]
+  labels       Label[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}
+
+model Label {
+  id       Int      @id @default(autoincrement())
+  name     String
+  color    String   @default("#888888")
+  user     User     @relation(fields: [userId], references: [id])
+  userId   Int
+
+  tasks     TaskLabel[]
+  notes     NoteLabel[]
+  bookmarks BookmarkLabel[]
+  events    EventLabel[]
+}
+
+model Task {
+  id          Int           @id @default(autoincrement())
+  title       String
+  description String?
+  status      String        @default("TODO")
+  priority    String        @default("MEDIUM")
+  dueDate     DateTime?
+  user        User          @relation(fields: [userId], references: [id])
+  userId      Int
+
+  labels      TaskLabel[]
+  dependsOn   TaskDependency[] @relation("TaskDependsOn")
+  dependents  TaskDependency[] @relation("TaskDependents")
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+
+model TaskDependency {
+  taskId        Int
+  dependsOnId   Int
+
+  task          Task @relation("TaskDependsOn", fields: [taskId], references: [id])
+  dependsOnTask Task @relation("TaskDependents", fields: [dependsOnId], references: [id])
+
+  @@id([taskId, dependsOnId])
+}
+
+model Note {
+  id        Int        @id @default(autoincrement())
+  title     String
+  content   String
+  user      User       @relation(fields: [userId], references: [id])
+  userId    Int
+  labels    NoteLabel[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Bookmark {
+  id        Int            @id @default(autoincrement())
+  title     String
+  url       String
+  description String?
+  user      User           @relation(fields: [userId], references: [id])
+  userId    Int
+  labels    BookmarkLabel[]
+  createdAt DateTime       @default(now())
+}
+
+model Event {
+  id        Int         @id @default(autoincrement())
+  title     String
+  description String?
+  startTime DateTime
+  endTime   DateTime
+  user      User        @relation(fields: [userId], references: [id])
+  userId    Int
+  labels    EventLabel[]
+}
+
+model TaskLabel {
+  task   Task  @relation(fields: [taskId], references: [id])
+  taskId Int
+  label  Label @relation(fields: [labelId], references: [id])
+  labelId Int
+
+  @@id([taskId, labelId])
+}
+
+model NoteLabel {
+  note    Note  @relation(fields: [noteId], references: [id])
+  noteId  Int
+  label   Label @relation(fields: [labelId], references: [id])
+  labelId Int
+
+  @@id([noteId, labelId])
+}
+
+model BookmarkLabel {
+  bookmark   Bookmark @relation(fields: [bookmarkId], references: [id])
+  bookmarkId Int
+  label      Label    @relation(fields: [labelId], references: [id])
+  labelId    Int
+
+  @@id([bookmarkId, labelId])
+}
+
+model EventLabel {
+  event   Event @relation(fields: [eventId], references: [id])
+  eventId Int
+  label   Label @relation(fields: [labelId], references: [id])
+  labelId Int
+
+  @@id([eventId, labelId])
+}
