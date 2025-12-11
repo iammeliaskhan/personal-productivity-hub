@@ -1,5 +1,11 @@
-<h1>New Task</h1>
-<form method="post" action="/tasks">
+<div class="page-shell">
+  <header class="page-header">
+    <h1 class="page-title">New task</h1>
+    <p class="page-subtitle">Capture what you intend to do, not just what’s urgent.</p>
+  </header>
+
+  <section class="page-card">
+    <form method="post" action="/tasks">
   <div>
     <label>Title</label><br />
     <input type="text" name="title" required />
@@ -29,4 +35,6 @@
     <input type="date" name="dueDate" />
   </div>
   <button type="submit">Create</button>
-</form>
+    </form>
+  </section>
+</div>

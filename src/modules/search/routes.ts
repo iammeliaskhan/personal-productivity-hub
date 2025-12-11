@@ -20,8 +20,8 @@ searchRouter.get("/", async (req, res) => {
           where: {
             userId,
             OR: [
-              { title: { contains: q, mode: "insensitive" } },
-              { description: { contains: q, mode: "insensitive" } },
+              { title: { contains: q } },
+              { description: { contains: q } },
             ],
           },
         })
@@ -31,8 +31,8 @@ searchRouter.get("/", async (req, res) => {
           where: {
             userId,
             OR: [
-              { title: { contains: q, mode: "insensitive" } },
-              { content: { contains: q, mode: "insensitive" } },
+              { title: { contains: q } },
+              { content: { contains: q } },
             ],
           },
         })
@@ -42,9 +42,9 @@ searchRouter.get("/", async (req, res) => {
           where: {
             userId,
             OR: [
-              { title: { contains: q, mode: "insensitive" } },
-              { description: { contains: q, mode: "insensitive" } },
-              { url: { contains: q, mode: "insensitive" } },
+              { title: { contains: q } },
+              { description: { contains: q } },
+              { url: { contains: q } },
             ],
           },
         })
@@ -54,8 +54,8 @@ searchRouter.get("/", async (req, res) => {
           where: {
             userId,
             OR: [
-              { title: { contains: q, mode: "insensitive" } },
-              { description: { contains: q, mode: "insensitive" } },
+              { title: { contains: q } },
+              { description: { contains: q } },
             ],
           },
         })

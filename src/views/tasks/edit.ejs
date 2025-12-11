@@ -1,5 +1,11 @@
-<h1>Edit Task</h1>
-<form method="post" action="/tasks/<%= task.id %>">
+<div class="page-shell">
+  <header class="page-header">
+    <h1 class="page-title">Edit task</h1>
+    <p class="page-subtitle">Refine the details and keep the next step obvious.</p>
+  </header>
+
+  <section class="page-card">
+    <form method="post" action="/tasks/<%= task.id %>">
   <div>
     <label>Title</label><br />
     <input type="text" name="title" value="<%= task.title %>" required />
@@ -29,4 +35,6 @@
     <input type="date" name="dueDate" value="<%= task.dueDate ? new Date(task.dueDate).toISOString().slice(0,10) : '' %>" />
   </div>
   <button type="submit">Save</button>
-</form>
+    </form>
+  </section>
+</div>

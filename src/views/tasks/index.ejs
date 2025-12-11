@@ -1,7 +1,16 @@
-<h1>Tasks</h1>
-<p><a href="/tasks/new">New task</a></p>
+<div class="page-shell">
+  <header class="page-header">
+    <h1 class="page-title">Tasks</h1>
+    <p class="page-subtitle">A focused list of work that actually matters today.</p>
+    <div class="page-actions">
+      <a class="page-pill-link" href="/tasks/new"><strong>+</strong><span>New task</span></a>
+    </div>
+  </header>
 
-<table>
+  <section class="page-card">
+    <h2 class="page-section-title">Your tasks</h2>
+
+    <table>
   <thead>
     <tr>
       <th>Title</th>
@@ -28,3 +37,5 @@
     <% }); %>
   </tbody>
 </table>
+  </section>
+</div>

@@ -1,5 +1,11 @@
-<h1>Global Search</h1>
-<form method="get" action="/search">
+<div class="page-shell">
+  <header class="page-header">
+    <h1 class="page-title">Global search</h1>
+    <p class="page-subtitle">Jump to tasks, notes, bookmarks, and events from one place.</p>
+  </header>
+
+  <section class="page-card">
+    <form method="get" action="/search">
   <input type="text" name="q" placeholder="Search..." value="<%= q %>" />
   <select name="type">
     <option value="all" <%= type === 'all' ? 'selected' : '' %>>All</option>
@@ -11,7 +17,8 @@
   <button type="submit">Search</button>
 </form>
 
-<ul>
+    <h2 class="page-section-title">Results</h2>
+    <ul>
   <% results.forEach(function(r) { %>
     <li>
       <strong><%= r.kind %></strong> -
@@ -27,3 +34,5 @@
     </li>
   <% }); %>
 </ul>
+  </section>
+</div>

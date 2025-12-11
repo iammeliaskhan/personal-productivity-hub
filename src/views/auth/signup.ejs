@@ -1,5 +1,25 @@
-<h1>Sign up</h1>
-<form method="post" action="/auth/signup">
+<div class="auth-shell">
+  <div class="auth-grid">
+    <section class="auth-hero">
+      <div class="auth-hero-content">
+        <div class="auth-kicker">
+          <span class="auth-kicker-dot"></span>
+          Start with a calm, intentional workspace
+        </div>
+        <h1 class="auth-title">Create your account</h1>
+        <p class="auth-subtitle">
+          A single place for your tasks, notes, and priorities. No noise, no chaos—just momentum.
+        </p>
+      </div>
+    </section>
+
+    <section class="auth-form-card">
+      <div class="auth-form-header">
+        <h2 class="auth-form-title">Sign up</h2>
+        <p class="auth-form-subtitle">A few seconds to set up. Undo anytime.</p>
+      </div>
+
+      <form method="post" action="/auth/signup">
   <div>
     <label>Email</label><br />
     <input type="email" name="email" required />
@@ -9,6 +29,14 @@
     <input type="password" name="password" required />
   </div>
   <button type="submit">Create account</button>
-</form>
+      </form>
 
-<p>Already have an account? <a href="/auth/login">Login</a></p>
+      <div class="auth-actions">
+        <div class="auth-secondary-link">
+          Already have an account?
+          <a href="/auth/login">Log in</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

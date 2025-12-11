@@ -1,9 +1,19 @@
-<h1>Dashboard</h1>
-<p>Welcome, <%= user.email %>!</p>
+<div class="page-shell">
+  <header class="page-header page-header--hero">
+    <div class="page-kicker">
+      <span class="page-kicker-dot"></span>
+      Today’s workspace
+    </div>
+    <h1 class="page-title">Good to see you, <%= user.email.split('@')[0] %></h1>
+    <p class="page-subtitle">A calm snapshot of what actually needs your attention.</p>
+  </header>
 
-<p>Quick links:</p>
-<ul>
-  <li><a href="/tasks">View tasks</a></li>
-  <li><a href="/tasks/new">Create a task</a></li>
-  <li><a href="/search">Global search</a></li>
-</ul>
+  <section class="page-card">
+    <h2 class="page-section-title">Quick links</h2>
+    <ul class="page-list">
+      <li><a class="page-pill-link" href="/tasks"><strong>Tasks</strong><span>Review and update</span></a></li>
+      <li><a class="page-pill-link" href="/tasks/new"><strong>New task</strong><span>Capture what’s on your mind</span></a></li>
+      <li><a class="page-pill-link" href="/search"><strong>Search</strong><span>Jump to anything</span></a></li>
+    </ul>
+  </section>
+</div>
