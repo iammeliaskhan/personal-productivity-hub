@@ -1,103 +1,60 @@
-<div class="auth-shell">
-  <div class="auth-grid">
-    <section class="auth-hero">
-      <div class="auth-hero-content">
-        <div class="auth-kicker">
-          <span class="auth-kicker-dot"></span>
-          Designed for deep work, not just checklists
-        </div>
-        <h1 class="auth-title">Personal Productivity Hub</h1>
-        <p class="auth-subtitle">
-          Log in to a focused workspace where your tasks, notes, and priorities
-          stay in one calm, intentional place. Build momentum one small win at a time.
-        </p>
+<div class="auth-shell auth-shell--login">
+  <section class="auth-form-card auth-form-card--centered auth-form-card--login">
+    <div class="auth-login-brand">
+      <span class="auth-login-brand-dot"></span>
+      <span>Personal Productivity Hub</span>
+    </div>
 
-        <div class="auth-pills">
-          <div class="auth-pill">
-            <span class="auth-pill-dot"></span>
-            Capture and clarify your day in seconds
-          </div>
-          <div class="auth-pill">
-            <span class="auth-pill-dot"></span>
-            See tasks by energy, not just deadlines
-          </div>
-          <div class="auth-pill">
-            <span class="auth-pill-dot"></span>
-            Protect time for deep work blocks
-          </div>
-        </div>
+    <div class="auth-form-header">
+      <h2 class="auth-form-title">Welcome back</h2>
+      <p class="auth-form-subtitle">Log in to pick up where you left off.</p>
+    </div>
 
-        <div class="auth-stats">
-          <div class="auth-stat">
-            <div class="auth-stat-label">Daily focus sessions</div>
-            <div class="auth-stat-value">+3</div>
-          </div>
-          <div class="auth-stat">
-            <div class="auth-stat-label">Tasks that truly matter</div>
-            <div class="auth-stat-value">42%</div>
-          </div>
-          <div class="auth-stat">
-            <div class="auth-stat-label">Average distraction time</div>
-            <div class="auth-stat-value">-27%</div>
-          </div>
+    <form method="post" action="/auth/login">
+      <div class="auth-field-group">
+        <div class="auth-field-label">
+          <label for="email">Email</label>
         </div>
-
-        <div class="auth-quote">
-          <div class="auth-quote-mark">“</div>
-          <div>
-            <div>
-              Once I started planning my day here, my calendar stopped feeling like a
-              to‑do list and started feeling like a strategy.
-            </div>
-            <div class="auth-quote-meta">Built for people who want to ship, not just stay busy.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="auth-form-card">
-      <div class="auth-form-header">
-        <h2 class="auth-form-title">Welcome back</h2>
-        <p class="auth-form-subtitle">Log in to pick up where you left off.</p>
+        <input id="email" type="email" name="email" autocomplete="email" required />
       </div>
 
-      <form method="post" action="/auth/login">
-        <div class="auth-field-group">
-          <div class="auth-field-label">
-            <label for="email">Email</label>
-          </div>
-          <input id="email" type="email" name="email" autocomplete="email" required />
+      <div class="auth-field-group">
+        <div class="auth-field-label">
+          <label for="password">Password</label>
+          <span class="auth-field-helper">Keep it private. We keep it encrypted.</span>
         </div>
-
-        <div class="auth-field-group">
-          <div class="auth-field-label">
-            <label for="password">Password</label>
-            <span class="auth-field-helper">Keep it private. We keep it encrypted.</span>
-          </div>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            autocomplete="current-password"
-            required
-          />
-        </div>
-
-        <div class="auth-actions">
-          <button type="submit">
-            Log into your workspace
-          </button>
-          <div class="auth-secondary-link">
-            New here?
-            <a href="/auth/signup">Create an account</a>
-          </div>
-        </div>
-      </form>
-
-      <div class="auth-badge-row">
-        <div class="auth-badge">Built for deep work & realistic planning.</div>
-        <div class="auth-badge">Your data stays in your workspace.</div>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          autocomplete="current-password"
+          required
+        />
       </div>
-    </section>
-  </div>
+
+      <div class="auth-actions">
+        <button type="submit">
+          Log into your workspace
+        </button>
+        <div class="auth-secondary-link">
+          New here?
+          <a href="/auth/signup">Create an account</a>
+        </div>
+      </div>
+    </form>
+
+    <div class="auth-badge-row">
+      <div class="auth-badge">Built for deep work & realistic planning.</div>
+      <div class="auth-badge">Your data stays in your workspace.</div>
+    </div>
+
+    <div class="auth-form-aside">
+      <div class="auth-form-aside-note">
+        Take 30 seconds to choose today&#39;s top three, then get back to real work.
+      </div>
+      <div class="auth-form-aside-note">
+        No streaks, no pressure&mdash;just a quiet place to move things forward.
+      </div>
+    </div>
+  </section>
 </div>

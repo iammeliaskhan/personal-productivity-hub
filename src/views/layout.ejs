@@ -281,6 +281,12 @@
         padding: 2.5rem 1rem 3.5rem;
       }
 
+      .auth-shell--login {
+        position: relative;
+        max-width: 980px;
+        width: 100%;
+      }
+
       .auth-grid {
         display: grid;
         grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -300,6 +306,15 @@
         border: 1px solid rgba(148, 163, 184, 0.5);
         box-shadow: 0 24px 80px rgba(148, 163, 184, 0.6);
         overflow: hidden;
+      }
+
+      .auth-hero--background {
+        position: absolute;
+        inset: 8% 10%;
+        margin: 0 auto;
+        opacity: 0.12;
+        filter: blur(1.5px);
+        pointer-events: none;
       }
 
       .auth-hero::before {
@@ -435,6 +450,35 @@
           #ffffff;
         border: 1px solid rgba(148, 163, 184, 0.5);
         box-shadow: 0 22px 70px rgba(148, 163, 184, 0.5);
+        position: relative;
+      }
+
+      .auth-form-card--centered {
+        max-width: 420px;
+        width: 100%;
+        z-index: 1;
+      }
+
+      .auth-form-card--login {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .auth-login-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.8rem;
+        color: #6b7280;
+        margin-bottom: 0.5rem;
+      }
+
+      .auth-login-brand-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--accent);
       }
 
       .auth-form-header {
@@ -507,6 +551,31 @@
         background: #f9fafb;
       }
 
+      .auth-form-aside {
+        margin-top: 1.1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        font-size: 0.8rem;
+        color: #9ca3af;
+      }
+
+      .auth-form-aside-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        max-width: 18rem;
+      }
+
+      .auth-form-aside-note::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--accent);
+        opacity: 0.7;
+      }
+
       .pill-badge {
         display: inline-flex;
         align-items: center;
@@ -530,6 +599,12 @@
           padding-inline: 1.1rem;
         }
 
+        /* On smaller screens, keep the login form primary and tuck hero details away */
+        .auth-hero--background .auth-stats,
+        .auth-hero--background .auth-quote {
+          display: none;
+        }
+
         main {
           padding-top: 1.5rem;
         }
@@ -544,8 +619,15 @@
           max-width: 520px;
         }
 
-        .auth-hero {
+        .auth-grid--login .auth-form-card {
           order: -1;
+        }
+
+        .auth-grid--login .auth-hero {
+          order: 0;
+        }
+
+        .auth-hero {
           padding: 1.8rem 1.7rem;
         }
 
