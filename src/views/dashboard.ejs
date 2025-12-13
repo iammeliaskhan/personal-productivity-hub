@@ -1,19 +1,58 @@
-<div class="page-shell">
+<div class="page-shell page-shell--dashboard">
   <header class="page-header page-header--hero">
     <div class="page-kicker">
       <span class="page-kicker-dot"></span>
-      Today’s workspace
+      Today
     </div>
     <h1 class="page-title">Good to see you, <%= user.email.split('@')[0] %></h1>
-    <p class="page-subtitle">A calm snapshot of what actually needs your attention.</p>
+    <p class="page-subtitle">A calm snapshot of what deserves your attention today&mdash;not everything you could do.</p>
   </header>
 
   <section class="page-card">
-    <h2 class="page-section-title">Quick links</h2>
-    <ul class="page-list">
-      <li><a class="page-pill-link" href="/tasks"><strong>Tasks</strong><span>Review and update</span></a></li>
-      <li><a class="page-pill-link" href="/tasks/new"><strong>New task</strong><span>Capture what’s on your mind</span></a></li>
-      <li><a class="page-pill-link" href="/search"><strong>Search</strong><span>Jump to anything</span></a></li>
+    <h2 class="page-section-title">Todays anchors</h2>
+    <p class="muted-text">Up to three tasks that would make today feel like a win.</p>
+    <div class="anchor-list">
+      <% if (!anchors || anchors.length === 0) { %>
+        <p class="muted-text">No anchors yet. Head to the Plan tab to choose a few.</p>
+      <% } %>
+      <% (anchors || []).forEach(function(task, idx) { %>
+        <div class="anchor-item">
+          <div class="anchor-rank">#<%= idx + 1 %></div>
+          <div>
+            <div><strong><%= task.title %></strong></div>
+            <div class="muted-text"><%= task.priority %> &middot; <%= task.status %></div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </section>
+
+  <section class="page-card">
+    <h2 class="page-section-title">Loose schedule</h2>
+    <p class="muted-text">Give your anchors a rough home in the day so they dont float around in your head.</p>
+    <div class="schedule-strip">
+      <div class="schedule-block">
+        <h3>Morning</h3>
+        <p class="muted-text">Deep work, one tab open.</p>
+      </div>
+      <div class="schedule-block">
+        <h3>Afternoon</h3>
+        <p class="muted-text">Calls, admin, lighter tasks.</p>
+      </div>
+      <div class="schedule-block">
+        <h3>Evening</h3>
+        <p class="muted-text">Optional. Protect rest by default.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-card">
+    <h2 class="page-section-title">Todays context</h2>
+    <p class="muted-text">Use this space to note constraints, feelings, or anything that will shape todays plan.</p>
+    <ul class="plan-list">
+      <li class="muted-text">Time constraints (meetings, appointments, family).</li>
+      <li class="muted-text">Energy levels (sleep, meds, mood).</li>
+      <li class="muted-text">One thing you want to protect time for.</li>
     </ul>
   </section>
 </div>

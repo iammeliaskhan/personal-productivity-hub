@@ -1,14 +1,44 @@
 <div class="page-shell">
   <header class="page-header">
     <h1 class="page-title">Tasks</h1>
-    <p class="page-subtitle">A focused list of work that actually matters today.</p>
+    <p class="page-subtitle">A calmer way to scan whats on your plate.</p>
     <div class="page-actions">
       <a class="page-pill-link" href="/tasks/new"><strong>+</strong><span>New task</span></a>
     </div>
   </header>
 
   <section class="page-card">
-    <h2 class="page-section-title">Your tasks</h2>
+    <h2 class="page-section-title">Suggested groups</h2>
+    <div class="plan-columns">
+      <div class="plan-column">
+        <h3 class="page-section-title">Deep focus</h3>
+        <p class="muted-text">High-impact work that benefits from fewer distractions.</p>
+        <ul class="plan-list">
+          <% tasks.filter(t => t.priority === 'HIGH').slice(0, 5).forEach(function(task) { %>
+            <li>
+              <strong><%= task.title %></strong>
+              <span class="muted-text">&middot; <%= task.status %></span>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+      <div class="plan-column">
+        <h3 class="page-section-title">Admin & light lifts</h3>
+        <p class="muted-text">Emails, logistics, and things you can do with lower energy.</p>
+        <ul class="plan-list">
+          <% tasks.filter(t => t.priority !== 'HIGH').slice(0, 5).forEach(function(task) { %>
+            <li>
+              <strong><%= task.title %></strong>
+              <span class="muted-text">&middot; <%= task.priority %> &middot; <%= task.status %></span>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-card">
+    <h2 class="page-section-title">All tasks</h2>
 
     <table>
   <thead>

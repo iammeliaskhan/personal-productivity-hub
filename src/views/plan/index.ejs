@@ -1,0 +1,105 @@
+<div class="page-shell">
+  <header class="page-header page-header--hero">
+    <div class="page-kicker">
+      <span class="page-kicker-dot"></span>
+      Plan the day
+    </div>
+    <h1 class="page-title">Lets shape a realistic day</h1>
+    <p class="page-subtitle">
+      One calm pass through your tasks: choose today, pick three anchors, and give them a loose home on your calendar.
+    </p>
+  </header>
+
+  <section class="page-card">
+    <h2 class="page-section-title">Steps for today</h2>
+    <ol class="plan-steps">
+      <li>Skim your tasks and mark what actually belongs to today.</li>
+      <li>Pick up to three anchors&mdash;the work that would make today feel like a win.</li>
+      <li>Roughly place those anchors into morning, afternoon, or evening.</li>
+    </ol>
+  </section>
+
+  <section class="page-card">
+    <h2 class="page-section-title">1. Today vs later</h2>
+    <p class="muted-text">Start by looking at whats on your plate. Well assume the first few TODOs are your best candidates for today.</p>
+    <div class="plan-columns">
+      <div class="plan-column">
+        <h3 class="page-section-title">Todaycu2019s candidates</h3>
+        <ul class="plan-list">
+          <% todos.slice(0, 6).forEach(function(task) { %>
+            <li>
+              <strong><%= task.title %></strong>
+              <span class="muted-text">&middot; <%= task.priority %> &middot; <%= task.status %></span>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+      <div class="plan-column">
+        <h3 class="page-section-title">Later (for now)</h3>
+        <ul class="plan-list">
+          <% todos.slice(6).forEach(function(task) { %>
+            <li class="muted-text">
+              <%= task.title %>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-card">
+    <h2 class="page-section-title">2. Todaycu2019s anchors</h2>
+    <p class="muted-text">These are the 1cu20133 tasks that, if finished, make today feel like progress&mdash;even if nothing else happens.</p>
+    <div class="anchor-list">
+      <% if (anchors.length === 0) { %>
+        <p class="muted-text">No obvious anchors yet. Try promoting one or two important TODOs.</p>
+      <% } %>
+      <% anchors.forEach(function(task, idx) { %>
+        <div class="anchor-item">
+          <div class="anchor-rank">#<%= idx + 1 %></div>
+          <div>
+            <div><strong><%= task.title %></strong></div>
+            <div class="muted-text"><%= task.priority %> &middot; <%= task.status %></div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </section>
+
+  <section class="page-card">
+    <h2 class="page-section-title">3. Light schedule for the day</h2>
+    <p class="muted-text">No perfect calendar required. Just give each anchor a loose home in your day.</p>
+    <div class="schedule-strip">
+      <div class="schedule-block">
+        <h3>Morning</h3>
+        <ul class="plan-list">
+          <% if (anchors[0]) { %>
+            <li><strong><%= anchors[0].title %></strong></li>
+          <% } else { %>
+            <li class="muted-text">Pick something that needs focus.</li>
+          <% } %>
+        </ul>
+      </div>
+      <div class="schedule-block">
+        <h3>Afternoon</h3>
+        <ul class="plan-list">
+          <% if (anchors[1]) { %>
+            <li><strong><%= anchors[1].title %></strong></li>
+          <% } else { %>
+            <li class="muted-text">Great for calls, admin, or lighter work.</li>
+          <% } %>
+        </ul>
+      </div>
+      <div class="schedule-block">
+        <h3>Evening</h3>
+        <ul class="plan-list">
+          <% if (anchors[2]) { %>
+            <li><strong><%= anchors[2].title %></strong></li>
+          <% } else { %>
+            <li class="muted-text">Optional. Protect your rest first.</li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
