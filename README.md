@@ -2,7 +2,7 @@
 
 A monolithic productivity web application that brings together **tasks**, **notes**, **bookmarks**, and **calendar-style events** in a single place. It is designed as a clean, modular monolith that showcases solid CRUD patterns, REST-style API design, and basic authentication.
 
-This project is intentionally opinionated around how personal productivity data is modeled (priorities, statuses, and relationships between entities) and is a good reference for a first full-stack Node.js/TypeScript application.
+The current UI is themed as an ADHD-friendly daily operating system, with a strong focus on **guided daily planning**, **anchor tasks**, and **focus sessions**, while still being a good reference for a first full-stack Node.js/TypeScript application.
 
 ---
 
@@ -13,12 +13,21 @@ This project is intentionally opinionated around how personal productivity data 
   - Passwords hashed with bcrypt
   - Session-based authentication with http-only cookies
 
+- **ADHD-friendly daily workflow**
+  - **Plan** page (`/plan`) for a guided, three-step daily planning ritual
+    - Triage TODOs into "Today" vs "Later"
+    - Choose up to three **anchor** tasks for the day
+    - Roughly place anchors into Morning / Afternoon / Evening
+  - **Today** dashboard (`/`) that surfaces anchors, a loose schedule, and a short "today's context" checklist
+  - **Focus** page (`/focus`) that shows one task at a time with a small "up next" queue
+
 - **Tasks (core vertical slice)**
   - Create, edit, list, and delete tasks
   - Status: `TODO`, `IN_PROGRESS`, `DONE`
   - Priority: `LOW`, `MEDIUM`, `HIGH`
   - Optional due dates
   - All data scoped per user
+  - Dashboard and tasks list derive "anchors" and lightweight groupings (e.g. "Deep focus" vs "Admin & light lifts") from existing task data
 
 - **Global search**
   - Search across tasks, notes, bookmarks, and events
@@ -52,11 +61,11 @@ The app is structured as a **modular monolith**:
 - `src/config/env.ts` – environment variable loading and configuration
 - `src/db/client.ts` – Prisma client singleton
 - `src/middleware/auth.ts` – attaches `currentUser` to the request and exposes `requireAuth` guard
-- `src/routes/index.ts` – top-level router that wires module routers
+- `src/routes/index.ts` – top-level router that wires module routers and top-level pages (dashboard, plan, focus)
 - `src/modules/auth` – signup, login, logout routes and controllers
 - `src/modules/tasks` – tasks CRUD routes and views
 - `src/modules/search` – global search endpoint and view
-- `src/views` – EJS templates, including shared `layout.ejs` and feature-specific views
+- `src/views` – EJS templates, including shared `layout.ejs`, dashboard, auth, tasks, search, **plan**, and **focus** views
 - `prisma/schema.prisma` – full relational schema for users, tasks, labels, notes, bookmarks, events, and task dependencies
 
 This organization keeps each concern (auth, tasks, search, etc.) in its own module while remaining within a single deployable service.
@@ -107,6 +116,36 @@ COOKIE_SECRET="your-cookie-secret"
 
 ---
 
+## UI tour (screenshots)
+
+> Place PNGs at the paths below and they will render directly in this README.
+
+### Login (before authentication)
+
+Public login page shown before you sign in: a clean, centered card with subtle branding and short helper notes.
+
+![Login](docs/screens/login.png)
+
+### Home / Today dashboard (after login)
+
+The default page after logging in at `/`: shows today’s anchors at the top, a loose schedule strip, and a short checklist for today’s context.
+
+![Today dashboard](docs/screens/today.png)
+
+### Focus (`/focus`)
+
+Single-task focus view with an "up next" queue.
+
+![Focus mode](docs/screens/focus.png)
+
+### Tasks (`/tasks`)
+
+Grouped "Deep focus" and "Admin & light lifts" sections above a full table of tasks.
+
+![Tasks](docs/screens/tasks.png)
+
+---
+
 ## Usage
 
 ### Authentication
@@ -115,6 +154,18 @@ COOKIE_SECRET="your-cookie-secret"
 2. Register with an email and password.
 3. After signup, you are redirected to the dashboard.
 4. Subsequent logins happen via `http://localhost:3000/auth/login`.
+
+### Daily workflow
+
+- **Plan your day**
+  - Navigate to `/plan`.
+  - Use the three-step flow to triage TODOs, pick anchors, and loosely place them into the day.
+- **Today dashboard**
+  - The root route `/` shows today’s anchors, a loose schedule, and a short checklist for today’s context.
+- **Focus mode**
+  - Navigate to `/focus` to work on a single task at a time with a small up-next list.
+
+None of this currently adds new fields to the database; anchors and groupings are derived from your existing tasks (status, priority, and creation order).
 
 ### Tasks
 
@@ -152,7 +203,7 @@ personal-productivity-hub/
 │  │  ├─ auth/             # Auth routes
 │  │  ├─ tasks/            # Tasks CRUD routes
 │  │  └─ search/           # Global search routes
-│  └─ views/               # EJS templates (layout, dashboard, auth, tasks, search)
+│  └─ views/               # EJS templates (layout, dashboard, auth, tasks, search, plan, focus)
 └─ README.md
 ```
 
@@ -179,9 +230,10 @@ npx prisma studio
 ## Roadmap / Ideas
 
 - Expose full CRUD flows for **notes**, **bookmarks**, and **events** in the UI
+- Persist daily planning data explicitly (e.g. `isToday`, `anchorRank`, `energy`, `estimatedMinutes` on tasks)
 - Implement label management and label-based filtering across entities
 - Visual calendar view for events
 - API-specific routes (pure JSON) for use by a separate frontend or mobile client
-- Basic test suite for auth and tasks using a Node.js testing framework
+- Basic test suite for auth, tasks, and daily planning flows using a Node.js testing framework
 
-This project is a solid foundation for experimenting with full-stack TypeScript, relational data modeling, and modular monolith design.
+This project is a solid foundation for experimenting with full-stack TypeScript, relational data modeling, modular monolith design, and ADHD-aware productivity workflows.
